@@ -16,8 +16,16 @@ export class NotificationComponent implements OnInit {
       data => {
         this.type = data.type;
         this.message = data.message;
+        this.reset();
       }
     );
+   }
+
+   reset(){
+    setTimeout(() => {
+      this.type = null;
+      this.message = null;
+     }, 3000);
    }
 
   ngOnInit() {
