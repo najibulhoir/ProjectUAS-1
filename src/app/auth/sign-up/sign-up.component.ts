@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import {NgForm} from '@angular/forms';
-
+import firestore from 'firebase/firestore';
 import * as firebase from 'firebase/app';
 
 @Component({
@@ -22,8 +22,18 @@ export class SignUpComponent implements OnInit {
 
     firebase.auth().createUserWithEmailAndPassword(email, password)
       .then(userData => {
+        firebase.auth().currentUser.sendEmailVerification();
 
-        console.log(userData);
+         firebase.database().ref('/users' + userData.user.uid).set({
+          email: email,
+          uid: userData.user.uid,
+          registrationDate: new Date().toString(),
+           fullname: fullname
+        })
+      .then(()=>{
+          console.log(userData);
+          firebase.auth().signOut();
+        });
       })
       .catch(err =>{
         console.log(err);

@@ -13,13 +13,13 @@ export class HeaderComponent implements OnInit {
   constructor() { }
 
   ngOnInit() {
-    firebase.auth().onAuthStateChanged(UserData => {
+    firebase.auth().onAuthStateChanged(userData => {
       //saat login
-      if (UserData && UserData.emailVerified){
+      if (userData && userData.emailVerified){
         this.isLoggedIn = true;
       } else {
         this.isLoggedIn = false;
-        firebase.auth().signOut();
+
       }
     })
   }
