@@ -19,6 +19,8 @@ import { AngularFireAuthModule } from 'angularfire2/auth';
 import { AngularFireModule } from 'angularfire2';
 import { AngularFireAuth } from 'angularfire2/auth';
 import { environment } from '../environments/environment';
+import { NotificationComponent } from './notification/notification.component';
+import { NotificationService } from './shared/notification.service';
 
 @NgModule({
   declarations: [
@@ -30,7 +32,8 @@ import { environment } from '../environments/environment';
     MyPostsComponent,
     SignUpComponent,
     LoginComponent,
-    HomeComponent
+    HomeComponent,
+    NotificationComponent
   ],
   imports: [
     BrowserModule,
@@ -43,7 +46,8 @@ import { environment } from '../environments/environment';
   ],
   providers:
     [RouteGuard,
-     AngularFireAuth
+     RouteGuard,
+     NotificationService
   ],
   bootstrap: [AppComponent]
 })
