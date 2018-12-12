@@ -1,7 +1,13 @@
 import * as firebase from 'firebase/app';
+import {UserService} from './user.service';
+import {Injectable} from '@angular/core';
 
-
+@Injectable()
 export class MyFireService {
+
+  constructor(private user: UserService){
+
+  }
 
   getUserFromDatabase(uid){
 
@@ -13,7 +19,7 @@ export class MyFireService {
 
   generateRandomNme(){
     let text ="";
-    const  possible = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz1234567890";
+    const  possible = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789";
 
     for (let i=0; i < 5; i++){
       text += possible.charAt(Math.floor(Math.random()*possible.length));
@@ -40,5 +46,22 @@ export class MyFireService {
 
 
   }
+
+  handleImageUpload(data){
+    const user = this.user.getProfile();
+
+    const newPersonalPostKey = firebase.database().ref().child('myposts').push().key;
+    const personalPostDetails = {
+      fileUrl: data.fileUrl,
+      name: data.fileName,
+      creationDate: new Date().toString()
+    };
+
+    const updates = {};
+    updates['/myposts/' + user.uid + "/" + newPersonalPostKey] = personalPostDetails;
+
+    return firebase.database().ref().update(updates);
+  }
+
 
 }

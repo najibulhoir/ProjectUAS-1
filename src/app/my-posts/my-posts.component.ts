@@ -11,7 +11,8 @@ import * as firebase from 'firebase/app';
 export class MyPostsComponent implements OnInit {
 
   constructor(private myFire: MyFireService,
-              private notifier: NotificationService) { }
+              private notifier: NotificationService,
+              ) { }
 
   ngOnInit() {
   }
@@ -23,12 +24,13 @@ export class MyPostsComponent implements OnInit {
       const file: File = fileList[0];
       this.myFire.uploadFile(file)
         .then(data => {
-          //TO DO
           this.notifier.display('success','Picture Uploaded!');
-          console.log(data['fileUrl']);
+          this.myFire.handleImageUpload(data);
+          // console.log(data['fileUrl']);
         })
         .catch(err => {
           this.notifier.display('error', err.message);
+          console.log(err);
         });
     }
   }

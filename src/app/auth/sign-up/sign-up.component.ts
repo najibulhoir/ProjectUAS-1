@@ -22,7 +22,7 @@ export class SignUpComponent implements OnInit {
 
     firebase.auth().createUserWithEmailAndPassword(email, password)
       .then(userData => {
-        firebase.auth().currentUser.sendEmailVerification();
+       userData.user.sendEmailVerification();
 
         const message = `A verification email has been sent to ${email}`;
         this.notifier.display('success', message);
