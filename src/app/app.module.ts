@@ -21,6 +21,8 @@ import { AngularFireAuth } from 'angularfire2/auth';
 import { environment } from '../environments/environment';
 import { NotificationComponent } from './notification/notification.component';
 import { NotificationService } from './shared/notification.service';
+import {MyFireService} from './shared/myfire.service';
+import {UserService} from './shared/user.service';
 
 @NgModule({
   declarations: [
@@ -45,9 +47,11 @@ import { NotificationService } from './shared/notification.service';
 
   ],
   providers:
-    [RouteGuard,
-     RouteGuard,
-     NotificationService
+    [ RouteGuard,
+      RouteGuard,
+      NotificationService,
+      MyFireService,
+      UserService
   ],
   bootstrap: [AppComponent]
 })

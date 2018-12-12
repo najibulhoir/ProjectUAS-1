@@ -27,7 +27,7 @@ export class SignUpComponent implements OnInit {
         const message = `A verification email has been sent to ${email}`;
         this.notifier.display('success', message);
 
-         firebase.database().ref('/users' + userData.user.uid).set({
+         firebase.database().ref('users/' + userData.user.uid).set({
            email: email,
            uid: userData.user.uid,
            registrationDate: new Date().toString(),
