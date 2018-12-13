@@ -1,7 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import {MyFireService} from '../shared/myfire.service';
 import {NotificationService} from '../shared/notification.service';
-import * as firebase from 'firebase/app';
 
 @Component({
   selector: 'app-my-posts',
@@ -11,7 +10,7 @@ import * as firebase from 'firebase/app';
 export class MyPostsComponent implements OnInit {
 
   constructor(private myFire: MyFireService,
-              private notifier: NotificationService,
+              private notifier: NotificationService
               ) { }
 
   ngOnInit() {
@@ -25,7 +24,7 @@ export class MyPostsComponent implements OnInit {
       this.myFire.uploadFile(file)
         .then(data => {
           this.notifier.display('success','Picture Uploaded!');
-          this.myFire.handleImageUpload(data);
+          // this.myFire.handleImageUpload(data);
           // console.log(data['fileUrl']);
         })
         .catch(err => {

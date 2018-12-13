@@ -2,6 +2,9 @@ import * as firebase from 'firebase/app';
 import {UserService} from './user.service';
 import {Injectable} from '@angular/core';
 
+
+
+
 @Injectable()
 export class MyFireService {
 
@@ -50,12 +53,20 @@ export class MyFireService {
   handleImageUpload(data){
     const user = this.user.getProfile();
 
-    const newPersonalPostKey = firebase.database().ref().child('myposts').push().key;
+
+
+    const newPersonalPostKey = firebase.database().ref().child('myposts/').push().key;
+    // newPersonalPostKey.set({
+    //   fileUrl: data.fileUrl,
+    //   name: data.fileName,
+    //   creationDate: new Date().toString()
+    // });
     const personalPostDetails = {
       fileUrl: data.fileUrl,
       name: data.fileName,
       creationDate: new Date().toString()
     };
+
 
     const updates = {};
     updates['/myposts/' + user.uid + "/" + newPersonalPostKey] = personalPostDetails;
